@@ -1,0 +1,29 @@
+import java.net.*;
+
+public class Peer {
+	String IPAddress;
+	InetAddress address;
+	//take port and ip 
+	//initiate a new thread depending on input
+	public static void main(String[] args) {
+		//
+		//
+
+	}
+
+	
+	
+	
+
+	public static String getMyIPAddress() {
+		InetAddress address = null;
+		try {
+			address = InetAddress.getLocalHost();
+		} catch (UnknownHostException e) {
+			System.out.println("Could not find local address!");
+		}
+		return address.getHostAddress();
+}
+}
+
+

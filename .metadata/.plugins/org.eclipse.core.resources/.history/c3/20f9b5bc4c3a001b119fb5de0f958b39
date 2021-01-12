@@ -1,0 +1,30 @@
+import java.net.*;
+import java.io.*;
+//broker side
+public class TransferUtilities {
+	int servPort;
+	ServerSocket servSocket;
+	Socket clntSock;
+	SocketAddress clntAddress;
+	
+	public TransferUtilities(int port) {
+		this.servPort = port;
+	}
+	
+	public void setUpSocket() throws IOException{
+		try {
+			servSocket = new ServerSocket(servPort);
+			System.out.println("Broker is up and running.");
+		} catch(IOException e) {}	
+	}
+	
+	public void handlePeer() throws IOException {
+		try {
+			clntSock = servSocket.accept();
+			clntAddress = clntSock.getRemoteSocketAddress();
+			System.out.println("Handling Peer at: " + clntAddress);
+		} catch(IOException e) {}
+	}
+	
+	
+}

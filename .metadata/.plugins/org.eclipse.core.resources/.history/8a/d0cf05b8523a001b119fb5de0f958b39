@@ -1,0 +1,22 @@
+import java.net.*;
+import java.io.*;
+
+public class Broker {
+	public static void main(String[] args) throws Exception{
+	List<TransferData> clientList = new ArrayList<TransferData>();
+	TransferData toReceive, toSend;
+	
+	int servPort = 5000;
+	TransferUtilities TU = new TransferUtilities(servPort);
+	
+	TU.setUpSocket();
+	
+	while(true) {
+		TU.handlePeer(); //connects to peer
+		toReceive = TransferUtilities.receiveDataFromClient();
+		toReceive.printFileName();
+		
+		clientList.add(toReceive);
+	}
+	}
+}

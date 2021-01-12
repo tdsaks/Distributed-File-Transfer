@@ -1,0 +1,20 @@
+import java.net.*;
+
+public class PeerThreadUtilities {
+	
+	public PeerThreadUtilities(Socket socket) {
+		
+	}
+	
+	public String getFileName() {
+		
+	}
+	
+	public void sendToTerminal(String prompt) {
+		System.out.println(prompt);
+	}
+	
+	public void sendFile(String file) {
+		
+	}
+}

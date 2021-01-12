@@ -1,0 +1,25 @@
+import java.net.*;
+import java.io.*;
+public class PeerReceiveThread implements Runnable{
+	Socket clntSock;
+	SocketAddress clntAddress;
+	int port;
+	String ipString;
+	InetAddress IP;
+	
+	public PeerReceiveThread(int port, String ipString) throws IOException{
+		this.port = port;
+		this.ipString = ipString;
+		this.IP = InetAddress.getByName(ipString);
+	}
+	
+	public void run() {
+		try{
+			clntSock = new Socket(IP,port);
+			PeerThreadUtilities PTU = new PeerThreadUtilities(clntSock);
+
+			
+		} catch (IOException e) {
+		}
+	}
+}

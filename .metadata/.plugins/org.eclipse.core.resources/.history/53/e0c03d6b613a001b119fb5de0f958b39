@@ -1,0 +1,27 @@
+import java.net.*;
+import java.io.*;
+public class PeerReceiveThread implements Runnable{
+	Socket clntSock;
+	SocketAddress clntAddress;
+	int port;
+	String ipString;
+	InetAddress IP;
+	
+	public PeerReceiveThread(TransferData brokeredData) throws IOException{
+		this.port = brokeredData.port;
+		this.ipString = brokeredData.getIPString();
+		this.IP = InetAddress.getByName(ipString);
+	}
+	
+	public void run() {
+		try{
+			clntSock = new Socket(IP,port); 
+			System.out.println("Connection established."); //testing
+			
+			PeerThreadUtilities PTU = new PeerThreadUtilities(clntSock);
+
+			
+		} catch (IOException e) {
+		}
+	}
+}

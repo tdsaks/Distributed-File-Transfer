@@ -1,0 +1,19 @@
+import java.net.*;
+import java.io.*;
+public class TransferUtilities {
+	int port;
+	String ipString, name;
+	Socket socket;
+	InetAddress IP;
+	
+	public TransferUtilities(String ipString, int port) throws IOException{
+		this.port = port;
+		this.ipString = ipString;
+		this.IP = InetAddress.getByName(ipString);
+
+	}
+	
+	public void setUpSocket() throws IOException{
+		socket = new Socket(ipString,port);
+	}
+}

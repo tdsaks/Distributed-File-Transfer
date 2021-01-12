@@ -1,0 +1,67 @@
+import java.net.*;
+import java.io.*;
+//peer side
+public class TransferUtilities {
+	int port;
+	String ipString, name, fileName;
+	static Socket socket;
+	InetAddress IP;
+	
+	
+	public TransferUtilities(String ipString, int port) throws IOException{
+		this.port = port;
+		this.ipString = ipString;
+		this.IP = InetAddress.getByName(ipString);
+
+	}
+	
+	public void setUpSocket() throws IOException{
+		socket = new Socket(IP,port);
+	}
+	
+	public void setFile(String file) {
+		this.fileName = file;
+	}
+	
+	public String getFile() {
+		return this.fileName;
+	}
+
+	public static void sendDataToServer(TransferData toSend) throws IOException {
+		try {
+			OutputStream os = socket.getOutputStream();
+			ObjectOutputStream oos = new ObjectOutputStream(os);
+			oos.writeObject(toSend);
+
+		} catch (EOFException e) { 
+			System.out.println("in Send EOFException: goodbye client at " + socket.getRemoteSocketAddress()
+					+ " with port# " + socket.getPort());
+			socket.close(); 
+		} catch (IOException e) {
+			System.out.println("in Send IOException: goodbye client at " + socket.getRemoteSocketAddress()
+					+ " with port# " + socket.getPort());
+			socket.close(); 
+		}
+	}
+	
+
+	public static TransferData receiveDataFromServer(Socket clntSock) throws IOException {
+		TransferData fromClient = null;
+
+		try {
+			InputStream is = clntSock.getInputStream();
+			ObjectInputStream ois = new ObjectInputStream(is);
+			fromClient = (TransferData) ois.readObject();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (EOFException e) { 
+			System.out.println("in receive EOF: goodbye client ");
+			clntSock.close(); 
+		} catch (IOException e) {
+			System.out.println("in receive IO: goodbye client ");
+			clntSock.close(); 
+		}
+		return fromClient;
+	}
+
+}

@@ -1,0 +1,15 @@
+import java.net.*;
+
+public class PeerReceiveThread implements Runnable{
+	Socket clntSock;
+	SocketAddress clntAddress;
+	int port;
+	String address;
+	
+	public PeerReceiveThread(int port, String address) {
+		
+	}
+	public void run() {
+		
+	}
+}

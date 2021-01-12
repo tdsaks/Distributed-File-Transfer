@@ -1,0 +1,13 @@
+import java.net.*;
+import java.io.*;
+
+public class Broker {
+	public static void main(String[] args) throws Exception{
+	ServerSocket servSocket;
+	transferData[] clientList = new transferData[100];
+	
+	int servPort = 5000;
+	
+	servSocket = new ServerSocket(servPort);
+	}
+}

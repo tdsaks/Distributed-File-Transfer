@@ -1,0 +1,55 @@
+import java.net.*;
+import java.io.*;
+import java.util.Scanner;
+public class PeerThreadUtilities {
+	Socket socket;
+	ServerSocket servSocket;
+	static String fileName;
+	
+	public PeerThreadUtilities(Socket socket) {
+		this.socket = socket;
+	}
+	
+	public PeerThreadUtilities(ServerSocket servSocket) {
+		this.servSocket = servSocket;
+	}
+	
+	public String getFileName() {
+		return fileName;
+	}
+	
+	public void setFileName(String name) {
+		fileName = name;
+	}
+	
+	public void sendToTerminal(String prompt) {
+		System.out.println(prompt);
+	}
+	
+	public void sendToPeerSocket(String line) {
+		
+	}
+	
+	public void sendFile(String file) {
+		try {
+			File infile = new File(file);
+			Scanner fromInputFile = new Scanner(infile).useDelimiter("\\n|\\r");
+			FileWriter fw = new FileWriter(file);
+			BufferedWriter bw = new BufferedWriter(fw);
+			
+			while(fromInputFile.hasNextLine()) {
+				String lineFromInputFile = fromInputFile.nextLine();
+				sendToPeerSocket(lineFromInputFile);
+			}
+		} catch (FileNotFoundException e) {
+			
+		} catch (IOException e) {
+			
+		}
+		
+
+		
+	}
+	
+	
+}

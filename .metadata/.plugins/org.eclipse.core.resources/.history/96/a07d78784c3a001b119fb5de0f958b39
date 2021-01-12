@@ -1,0 +1,13 @@
+
+public class transferData {
+	String message, name, fileName, ipString;
+	int port;
+	
+	public transferData(String string) {
+		
+	}
+	
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+}

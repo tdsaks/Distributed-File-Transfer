@@ -1,0 +1,15 @@
+import java.net.*;
+
+public class TransferUtilities {
+	int servPort;
+	ServerSocket servSocket;
+	
+	public TransferUtilities(int port) {
+		this.servPport = port;
+	}
+	
+	public void setUpSocket() {
+		servSocket = new ServerSocket(servPort);
+		System.out.println("Broker is up and running.");
+	}
+}

@@ -1,0 +1,37 @@
+import java.io.*;
+import java.net.*;
+
+public class PeerSendThread implements Runnable{
+	PeerThreadUtilities PTU;
+	Socket socket;
+	ServerSocket servSocket;
+	InputStream inStream;
+	OutputStream outStream;
+	
+	int port;
+	String ipString;
+	InetAddress IP;
+	
+	String file;
+	
+	public PeerSendThread(int port, String ip) throws Exception{
+		this.port = port;
+		this.ipString = ip;
+		this.IP = InetAddress.getByName(ipString);
+		servSocket = new ServerSocket(port);
+		
+	}
+	
+	public void run() {
+		while(true) {
+			try {
+				PTU = new PeerThreadUtilities(servSocket.accept());
+				file = PTU.getFileName();
+				PTU.sendToTerminal("The peer requests " + file);
+				PTU.sendFile(file);
+				
+			} catch (Exception e) {
+			}
+		}
+	}
+}

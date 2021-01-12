@@ -1,0 +1,22 @@
+import java.net.*;
+
+public class PeerSendThread implements Runnable{
+	Socket socket;
+	ServerSocket servSocket;
+	InputStream inStream;
+	OutputStream outStream;
+	
+	int port;
+	String ipString;
+	InetAddress IP;
+	
+	string file;
+	
+	public PeerSendThread(int port, String ip) {
+		this.port = port;
+		this.ipString = ip;
+		this.IP = InetAddress.getByName(ipString);
+		servSocket = new ServerSocket(port);
+		
+	}
+}

@@ -1,0 +1,47 @@
+import java.net.*;
+import java.io.*;
+public class TransferUtilities {
+	int port;
+	String ipString, name, fileName;
+	Socket socket;
+	InetAddress IP;
+	
+	
+	public TransferUtilities(String ipString, int port) throws IOException{
+		this.port = port;
+		this.ipString = ipString;
+		this.IP = InetAddress.getByName(ipString);
+
+	}
+	
+	public void setUpSocket() throws IOException{
+		socket = new Socket(IP,port);
+	}
+	
+	public void setFile(String file) {
+		this.fileName = file;
+	}
+	
+	public String getFile() {
+		return this.fileName;
+	}
+	
+	
+
+	public static void sendDataToServer(TransferData toSend) throws IOException {
+		try {
+			OutputStream os = socket.getOutputStream();
+			ObjectOutputStream oos = new ObjectOutputStream(os);
+			oos.writeObject(toSend);
+
+		} catch (EOFException e) { 
+			System.out.println("in Send EOFException: goodbye client at " + socket.getRemoteSocketAddress()
+					+ " with port# " + socket.getPort());
+			socket.close(); 
+		} catch (IOException e) {
+			System.out.println("in Send IOException: goodbye client at " + socket.getRemoteSocketAddress()
+					+ " with port# " + socket.getPort());
+			socket.close(); 
+		}
+	}
+}

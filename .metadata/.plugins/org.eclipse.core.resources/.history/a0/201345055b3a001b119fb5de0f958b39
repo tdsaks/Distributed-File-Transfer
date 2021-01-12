@@ -1,0 +1,47 @@
+import java.net.*;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Broker {
+	public static void main(String[] args) throws Exception{
+	List<TransferData> clientList = new ArrayList<TransferData>();
+	TransferData toReceive, toSend;
+	
+	int servPort = 5000;
+	TransferUtilities TU = new TransferUtilities(servPort);
+	
+	TU.setUpSocket();
+	
+	while(true) {
+		TU.handlePeer(); //connects to peer
+		toReceive = TransferUtilities.receiveDataFromClient();
+		
+		if(toReceive.requestType.equals("r")) {
+			
+			System.out.println("Register Type Received.");
+			clientList.add(toReceive);
+			
+		} else if(toReceive.requestType.equals("f")) {
+			
+			System.out.println("Find Type Received");
+			int i = 0;
+
+			String fileName = toReceive.fileName;
+			
+			toSend = new TransferData("");
+			
+			while(i < clientList.size()) {
+				if(clientList.get(i).getFile().equals(fileName)) {
+					toSend = clientList.get(i);
+					break;
+				}
+				toSend.setMessage("n");;
+			}
+			
+			TransferUtilities.sendDataBackToClient(toSend);
+		}
+
+	}
+	}
+}

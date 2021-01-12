@@ -1,0 +1,26 @@
+import java.net.*;
+
+public class PeerThreadUtilities {
+	Socket socket;
+	ServerSocket servSocket;
+	
+	public PeerThreadUtilities(Socket socket) {
+		this.socket = socket;
+	}
+	
+	public PeerThreadUtilities(ServerSocket servSocket) {
+		this.servSocket = servSocket;
+	}
+	
+	public String getFileName() {
+		return "hi";
+	}
+	
+	public void sendToTerminal(String prompt) {
+		System.out.println(prompt);
+	}
+	
+	public void sendFile(String file) {
+		
+	}
+}

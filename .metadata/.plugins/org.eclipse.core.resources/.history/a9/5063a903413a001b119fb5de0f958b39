@@ -1,0 +1,21 @@
+import java.net.*;
+import java.io.*;
+
+public class TransferUtilities {
+	int servPort;
+	ServerSocket servSocket;
+	
+	public TransferUtilities(int port) {
+		this.servPort = port;
+	}
+	
+	public void setUpSocket() throws IOException{
+		try {
+			servSocket = new ServerSocket(servPort);
+			System.out.println("Broker is up and running.");
+		} catch(IOException e) {
+		}
+	
+	
+}
+}

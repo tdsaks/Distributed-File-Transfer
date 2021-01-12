@@ -1,0 +1,34 @@
+
+public class transferData {
+	String ipString, name, message, fileName;
+	int port;
+	
+	public transferData(String address, int port) {
+		this.ipString = address;
+		this.port = port;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public void setIPString(String ip) {
+		this.ipString = ip;
+	}
+	
+	public String getIPString() {
+		return this.ipString;
+	}
+	
+	public void setFile(String file) {
+		this.fileName = file;
+	}
+	
+	public String getFile() {
+		return this.fileName;
+	}
+}

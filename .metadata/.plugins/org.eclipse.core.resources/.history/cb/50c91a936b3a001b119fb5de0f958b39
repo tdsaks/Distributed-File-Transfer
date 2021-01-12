@@ -1,0 +1,78 @@
+import java.net.*;
+import java.io.*;
+import java.util.Scanner;
+public class PeerThreadUtilities {
+	static Socket socket;
+	static ServerSocket servSocket;
+	static String fileName;
+	
+	public PeerThreadUtilities(Socket s, String fn) {
+		socket = s;
+		fileName = fn;
+	}
+	
+	public PeerThreadUtilities(ServerSocket ss) {
+		servSocket = ss;
+	}
+	
+	public String getFileName() {
+		return fileName;
+	}
+	
+	public void setFileName(String name) {
+		fileName = name;
+	}
+	
+	public void sendToTerminal(String prompt) {
+		System.out.println(prompt);
+	}
+	
+	
+	public void sendFile() throws Exception{
+		try {
+			File infile = new File(fileName);
+			Scanner fromInputFile = new Scanner(infile).useDelimiter("\\n|\\r");
+			
+			OutputStream os = socket.getOutputStream();
+			ObjectOutputStream oos = new ObjectOutputStream(os);
+			
+			while(fromInputFile.hasNextLine()) {
+				String lineFromInputFile = fromInputFile.nextLine();
+				oos.writeObject(lineFromInputFile);
+			}
+			oos.writeObject("finished");
+			
+			fromInputFile.close();
+			
+			
+		} catch (Exception e) {
+			
+		}  
+		
+
+		
+	}
+	
+	public void receiveFile() throws Exception{
+		try {
+			FileWriter fw = new FileWriter(fileName);
+			BufferedWriter bw = new BufferedWriter(fw);
+			
+			InputStream is = socket.getInputStream();
+			ObjectInputStream ois = new ObjectInputStream(is);
+			
+			String message = "";
+			while(message != "finished") {
+				message = (String) ois.readObject();
+				bw.write(message + "\n");
+			}
+			
+			bw.close();
+			
+		} catch (Exception e) {
+			
+		} 
+	}
+	
+	
+}

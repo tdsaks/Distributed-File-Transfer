@@ -1,0 +1,14 @@
+import java.net.*;
+
+public class TransferUtilities {
+	int port;
+	
+	
+	public TransferUtilities(int port) {
+		this.port = port;
+	}
+	
+	public void setUpSocket() {
+		
+	}
+}

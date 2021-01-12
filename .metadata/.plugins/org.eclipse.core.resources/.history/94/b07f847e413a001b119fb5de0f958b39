@@ -1,0 +1,12 @@
+
+public class transferData {
+	String address, name, message, fileName;
+	int port;
+	
+	public transferData(String address, int port) {
+		this.address = address;
+		this.port = port;
+	}
+	
+	//
+}

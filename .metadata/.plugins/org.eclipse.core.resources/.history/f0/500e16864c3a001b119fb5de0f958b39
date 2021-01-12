@@ -1,0 +1,17 @@
+import java.net.*;
+import java.io.*;
+
+public class Broker {
+	public static void main(String[] args) throws Exception{
+	transferData[] clientList = new transferData[100]; //data of 
+	
+	int servPort = 5000;
+	TransferUtilities TU = new TransferUtilities(servPort);
+	
+	TU.setUpSocket();
+	
+	while(true) {
+		TU.handlePeer(); //connects to peer
+	}
+	}
+}

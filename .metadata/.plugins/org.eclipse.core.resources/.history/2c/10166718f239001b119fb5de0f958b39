@@ -1,0 +1,7 @@
+import java.net.*;
+
+public class PeerSendThread implements Runnable{
+	int port;
+	String ipString;
+	InetAddress IP;
+}

@@ -1,0 +1,9 @@
+import java.net.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Broker {
+	ServerSocket servSocket;
+	List<String[]> clientList = new ArrayList<>();
+	
+}
